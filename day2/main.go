@@ -71,19 +71,10 @@ func parseGameByLine(gameString string) Game {
 
 			switch {
 			case strings.Contains(c, "red"):
-				if colorNumber > 12 {
-					return Game{}
-				}
 				set.red = colorNumber
 			case strings.Contains(c, "green"):
-				if colorNumber > 13 {
-					return Game{}
-				}
 				set.green = colorNumber
 			case strings.Contains(c, "blue"):
-				if colorNumber > 14 {
-					return Game{}
-				}
 				set.blue = colorNumber
 			}
 		}
@@ -99,7 +90,21 @@ func main() {
 	var counter int
 
 	for _, v := range games {
-		counter += v.number
+		var r, g, b int
+		for _, set := range v.sets {
+			if r < set.red {
+				r = set.red
+			}
+			if g < set.green {
+				g = set.green
+			}
+			if b < set.blue {
+				b = set.blue
+			}
+		}
+		fmt.Println(r, g, b)
+		mult := r * g * b
+		counter += mult
 	}
 	fmt.Println(counter)
 }
