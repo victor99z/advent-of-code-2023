@@ -165,6 +165,9 @@ func main() {
 				digit = ""
 			}
 		}
+		if len(digit) > 0 && valid {
+			mapeamento[digit] = valid
+		}
 		for k, v := range mapeamento {
 			if v {
 				number, _ := strconv.Atoi(k)
